@@ -274,112 +274,81 @@ header p {
   <section class="features">
     <div class="feature">
       <h3>Expense Account</h3>
-      <p>This help show you how much money flows on your account.</p><div class="container">
-        <div class="feature">
-          <h3>Expenditure Amount</h3>
-          <p>This is the figure approved in the expenditure data.</p>
-          <div id="expenditureOutput" style="color: blue; font-weight: bold;"></div>
-          <script>
-            const sheetUrlExpenditure = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJhHBhBVTNac9rwXHYOoU0ZC7PWy-euWf-A0X5xU2G_a0FYCg5RTiaH3sygaNNVNfWXKTIgSO7BJ4Y/pubhtml?gid=1600776302&single=true";
-      
-            async function fetchExpenditureAmount() {
-              try {
-                const response = await fetch(sheetUrlExpenditure);
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, "text/html");
-      
-                const rows = doc.querySelectorAll("table tr");
-                for (const row of rows) {
-                  const cells = row.querySelectorAll("td");
-                  if (cells[0] && cells[0].innerText.trim() === "Titus") {
-                    const value = cells[1]?.innerText.trim();
-                    document.getElementById("expenditureOutput").innerHTML = `The value for Titus is: </p>Ksh. ${value}`;
-                    return;
-                  }
+<p>This helps show you how much money flows on your account.</p>
+<div class="container">
+    <label for="nameSelect">Select a Name:</label>
+    <select id="nameSelect" onchange="updateData()" style="margin-bottom: 20px;">
+        <option value="">-- Select a Name --</option>
+        <option value="Titus">Titus</option>
+        <option value="Kelvine">Kelvine</option>
+       
+    </select>
+
+    <div class="feature">
+        <h3>Expenditure Amount</h3>
+        <p>This is the figure approved in the expenditure data.</p>
+        <div id="expenditureOutput" style="color: blue; font-weight: bold;"></div>
+    </div>
+
+    <div class="feature">
+        <h3>Receipts Amount</h3>
+        <p>This is the figure reconciled in the receipts.</p>
+        <div id="receiptsOutput" style="color: blue; font-weight: bold;"></div>
+    </div>
+
+    <div class="feature">
+        <h3>Balance Amount</h3>
+        <p>Money left at hand.</p>
+        <div id="balanceOutput" style="color: blue; font-weight: bold;"></div>
+    </div>
+</div>
+
+<script>
+    const sheetUrls = {
+        expenditure: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJhHBhBVTNac9rwXHYOoU0ZC7PWy-euWf-A0X5xU2G_a0FYCg5RTiaH3sygaNNVNfWXKTIgSO7BJ4Y/pubhtml?gid=1600776302&single=true",
+        receipts: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGUVHqadLXkMMMYTqveJozm3pUww5PLoYXvs0Dcm8U3AuZOsqqCqmCmVXkeSeZ82FQ7ARHPhLW-dWo/pub?gid=1910741080&single=true",
+        balance: "https://docs.google.com/spreadsheets/d/e/2PACX-1vRHw6u2AjTlo2pVY2Zq7grvI0RqGECHAS7nYvDhGYAeak4eppe8BY7YYS_K3gIJ5tJXykKUWEmq114n/pubhtml?gid=0&single=true"
+    };
+
+    async function fetchData(sheetUrl, name) {
+        try {
+            const response = await fetch(sheetUrl);
+            const html = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            const rows = doc.querySelectorAll("table tr");
+            for (const row of rows) {
+                const cells = row.querySelectorAll("td");
+                if (cells[0] && cells[0].innerText.trim() === name) {
+                    return cells[1]?.innerText.trim() || "0";
                 }
-      
-                document.getElementById("expenditureOutput").innerText = "Titus not found.";
-              } catch (error) {
-                document.getElementById("expenditureOutput").innerText = "Error fetching data.";
-                console.error(error);
-              }
             }
-      
-            fetchExpenditureAmount();
-          </script>
-        </div>
-      
-        <div class="feature">
-          <h3>Receipts Amount</h3>
-          <p>This is the figure reconciled in the receipts.</p>
-          <div id="receiptsOutput" style="color: blue; font-weight: bold;"></div>
-          <script>
-            const sheetUrlReceipts = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGUVHqadLXkMMMYTqveJozm3pUww5PLoYXvs0Dcm8U3AuZOsqqCqmCmVXkeSeZ82FQ7ARHPhLW-dWo/pub?gid=1910741080&single=true";
-      
-            async function fetchReceiptAmount() {
-              try {
-                const response = await fetch(sheetUrlReceipts);
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, "text/html");
-      
-                const rows = doc.querySelectorAll("table tr");
-                for (const row of rows) {
-                  const cells = row.querySelectorAll("td");
-                  if (cells[0] && cells[0].innerText.trim() === "Titus") {
-                    const value = cells[1]?.innerText.trim();
-                    document.getElementById("receiptsOutput").innerHTML = `The value for Titus is:</p> Ksh. ${value}`;
-                    return;
-                  }
-                }
-      
-                document.getElementById("receiptsOutput").innerText = "Titus not found.";
-              } catch (error) {
-                document.getElementById("receiptsOutput").innerText = "Error fetching data.";
-                console.error(error);
-              }
-            }
-      
-            fetchReceiptAmount();
-          </script>
-        </div>
-      
-        <div class="feature">
-          <h3>Balance Amount</h3>
-          <p>Money left at hand.</p>
-          <div id="balanceOutput" style="color: blue; font-weight: bold;"></div>
-          <script>
-            const sheetUrlBalance = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRHw6u2AjTlo2pVY2Zq7grvI0RqGECHAS7nYvDhGYAeak4eppe8BY7YYS_K3gIJ5tJXykKUWEmq114n/pubhtml?gid=0&single=true";
-      
-            async function fetchBalanceAmount() {
-              try {
-                const response = await fetch(sheetUrlBalance);
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, "text/html");
-      
-                const rows = doc.querySelectorAll("table tr");
-                for (const row of rows) {
-                  const cells = row.querySelectorAll("td");
-                  if (cells[0] && cells[0].innerText.trim() === "Titus") {
-                    const value = cells[1]?.innerText.trim();
-                    document.getElementById("balanceOutput").innerHTML = `The balance for Titus is: </p>Ksh. ${value}`;
-                    return;
-                  }
-                }
-      
-                document.getElementById("balanceOutput").innerText = "Titus not found.";
-              } catch (error) {
-                document.getElementById("balanceOutput").innerText = "Error fetching data.";
-                console.error(error);
-              }
-            }
-      
-            fetchBalanceAmount();
-          </script>
-        </div>
-      </div>
+            return "Data not found.";
+        } catch (error) {
+            console.error(error);
+            return "Error fetching data.";
+        }
+    }
+
+    async function updateData() {
+        const name = document.getElementById("nameSelect").value;
+        if (!name) {
+            document.getElementById("expenditureOutput").innerText = "";
+            document.getElementById("receiptsOutput").innerText = "";
+            document.getElementById("balanceOutput").innerText = "";
+            return;
+        }
+
+        const expenditureValue = await fetchData(sheetUrls.expenditure, name);
+        const receiptsValue = await fetchData(sheetUrls.receipts, name);
+        const balanceValue = await fetchData(sheetUrls.balance, name);
+
+        document.getElementById("expenditureOutput").innerHTML = `The value for ${name} is:</p> Ksh. ${expenditureValue}`;
+        document.getElementById("receiptsOutput").innerHTML = `The value for ${name} is: </p>Ksh. ${receiptsValue}`;
+        document.getElementById("balanceOutput").innerHTML = `The balance for ${name} is: </p>Ksh. ${balanceValue}`;
+    }
+</script>
+
       
       </body>
       </html>
