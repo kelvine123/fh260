@@ -277,7 +277,7 @@ header p {
       <p>This help show you how much money flows on your account.</p><div class="container">
         <div class="feature">
           <h3>Expenditure Amount</h3>
-          <p>This is the figure extracted from the expenditure data.</p>
+          <p>This is the figure approved in the expenditure data.</p>
           <div id="expenditureOutput" style="color: blue; font-weight: bold;"></div>
           <script>
             const sheetUrlExpenditure = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJhHBhBVTNac9rwXHYOoU0ZC7PWy-euWf-A0X5xU2G_a0FYCg5RTiaH3sygaNNVNfWXKTIgSO7BJ4Y/pubhtml?gid=1600776302&single=true";
@@ -294,7 +294,7 @@ header p {
                   const cells = row.querySelectorAll("td");
                   if (cells[0] && cells[0].innerText.trim() === "Titus") {
                     const value = cells[1]?.innerText.trim();
-                    document.getElementById("expenditureOutput").innerHTML = `The value for Titus is: Ksh. ${value}`;
+                    document.getElementById("expenditureOutput").innerHTML = `The value for Titus is: </p>Ksh. ${value}`;
                     return;
                   }
                 }
@@ -329,7 +329,7 @@ header p {
                   const cells = row.querySelectorAll("td");
                   if (cells[0] && cells[0].innerText.trim() === "Titus") {
                     const value = cells[1]?.innerText.trim();
-                    document.getElementById("receiptsOutput").innerHTML = `The value for Titus is: Ksh. ${value}`;
+                    document.getElementById("receiptsOutput").innerHTML = `The value for Titus is:</p> Ksh. ${value}`;
                     return;
                   }
                 }
@@ -364,7 +364,7 @@ header p {
                   const cells = row.querySelectorAll("td");
                   if (cells[0] && cells[0].innerText.trim() === "Titus") {
                     const value = cells[1]?.innerText.trim();
-                    document.getElementById("balanceOutput").innerHTML = `The balance for Titus is: Ksh. ${value}`;
+                    document.getElementById("balanceOutput").innerHTML = `The balance for Titus is: </p>Ksh. ${value}`;
                     return;
                   }
                 }
