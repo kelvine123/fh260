@@ -101,7 +101,7 @@
   border: 2px solid #ccc;
   border-radius: 12px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  background-color: #d1928c; /* Light cream background */
+  background-color: #a2cbe3; /* Light cream background */
   margin: 10px auto;
   max-width: 600px; /* Limit size on larger screens */
   width: 100%;
@@ -180,11 +180,11 @@
     @media (max-width: 768px) {
       .forex-calculator {
         padding: 20px;
-        width: 90%; /* Take up more screen space on smaller devices */
+        width: 100%; /* Take up more screen space on smaller devices */
       }
       .calculator-container {
         flex-direction: column;
-        gap: 20px;
+        gap: 15px;
       }
       .currency select {
         max-width: 100%; /* Ensure dropdowns fit smaller screens */
@@ -201,7 +201,36 @@
     padding: 30px;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-}
+}.container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .feature {
+      flex: 1 1 calc(30% - 20px); /* Each box takes up about 30% width with a small margin */
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 15px;
+      text-align: center;
+      
+    }
+
+    .feature h3 {
+      margin: 0 0 10px;
+    }
+
+    .feature p {
+      margin: 0 0 15px;
+    }
+
+    @media (max-width: 768px) {
+      .feature {
+        flex: 1 1 100%; /* Each box takes up full width on smaller screens */
+      }
 
 header h1 {
     font-size: 2.5rem;
@@ -244,16 +273,116 @@ header p {
   <!-- Features Section -->
   <section class="features">
     <div class="feature">
-      <h3>Expenditure Amount</h3>
-      <p>This is the amount of money you have requested, and approved.</p>
-    </div>
-    <div class="feature">
-      <h3>Receipts Amount</h3>
-      <p>This is the figure reconciled in the receipts .</p>
-    </div>
-    <div class="feature">
-      <h3>Balance Amount</h3>
-      <p>Money left at hand.</p>
+      <h3>Expense Account</h3>
+      <p>This help show you how much money flows on your account.</p><div class="container">
+        <div class="feature">
+          <h3>Expenditure Amount</h3>
+          <p>This is the figure extracted from the expenditure data.</p>
+          <div id="expenditureOutput" style="color: blue; font-weight: bold;"></div>
+          <script>
+            const sheetUrlExpenditure = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRJhHBhBVTNac9rwXHYOoU0ZC7PWy-euWf-A0X5xU2G_a0FYCg5RTiaH3sygaNNVNfWXKTIgSO7BJ4Y/pubhtml?gid=1600776302&single=true";
+      
+            async function fetchExpenditureAmount() {
+              try {
+                const response = await fetch(sheetUrlExpenditure);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+      
+                const rows = doc.querySelectorAll("table tr");
+                for (const row of rows) {
+                  const cells = row.querySelectorAll("td");
+                  if (cells[0] && cells[0].innerText.trim() === "Titus") {
+                    const value = cells[1]?.innerText.trim();
+                    document.getElementById("expenditureOutput").innerHTML = `The value for Titus is: Ksh. ${value}`;
+                    return;
+                  }
+                }
+      
+                document.getElementById("expenditureOutput").innerText = "Titus not found.";
+              } catch (error) {
+                document.getElementById("expenditureOutput").innerText = "Error fetching data.";
+                console.error(error);
+              }
+            }
+      
+            fetchExpenditureAmount();
+          </script>
+        </div>
+      
+        <div class="feature">
+          <h3>Receipts Amount</h3>
+          <p>This is the figure reconciled in the receipts.</p>
+          <div id="receiptsOutput" style="color: blue; font-weight: bold;"></div>
+          <script>
+            const sheetUrlReceipts = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTGUVHqadLXkMMMYTqveJozm3pUww5PLoYXvs0Dcm8U3AuZOsqqCqmCmVXkeSeZ82FQ7ARHPhLW-dWo/pub?gid=1910741080&single=true";
+      
+            async function fetchReceiptAmount() {
+              try {
+                const response = await fetch(sheetUrlReceipts);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+      
+                const rows = doc.querySelectorAll("table tr");
+                for (const row of rows) {
+                  const cells = row.querySelectorAll("td");
+                  if (cells[0] && cells[0].innerText.trim() === "Titus") {
+                    const value = cells[1]?.innerText.trim();
+                    document.getElementById("receiptsOutput").innerHTML = `The value for Titus is: Ksh. ${value}`;
+                    return;
+                  }
+                }
+      
+                document.getElementById("receiptsOutput").innerText = "Titus not found.";
+              } catch (error) {
+                document.getElementById("receiptsOutput").innerText = "Error fetching data.";
+                console.error(error);
+              }
+            }
+      
+            fetchReceiptAmount();
+          </script>
+        </div>
+      
+        <div class="feature">
+          <h3>Balance Amount</h3>
+          <p>Money left at hand.</p>
+          <div id="balanceOutput" style="color: blue; font-weight: bold;"></div>
+          <script>
+            const sheetUrlBalance = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRHw6u2AjTlo2pVY2Zq7grvI0RqGECHAS7nYvDhGYAeak4eppe8BY7YYS_K3gIJ5tJXykKUWEmq114n/pubhtml?gid=0&single=true";
+      
+            async function fetchBalanceAmount() {
+              try {
+                const response = await fetch(sheetUrlBalance);
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, "text/html");
+      
+                const rows = doc.querySelectorAll("table tr");
+                for (const row of rows) {
+                  const cells = row.querySelectorAll("td");
+                  if (cells[0] && cells[0].innerText.trim() === "Titus") {
+                    const value = cells[1]?.innerText.trim();
+                    document.getElementById("balanceOutput").innerHTML = `The balance for Titus is: Ksh. ${value}`;
+                    return;
+                  }
+                }
+      
+                document.getElementById("balanceOutput").innerText = "Titus not found.";
+              } catch (error) {
+                document.getElementById("balanceOutput").innerText = "Error fetching data.";
+                console.error(error);
+              }
+            }
+      
+            fetchBalanceAmount();
+          </script>
+        </div>
+      </div>
+      
+      </body>
+      </html>
     </div>
     <div class="feature forex-calculator">
       <h3>Forex Calculator</h3>
@@ -274,8 +403,7 @@ header p {
             <option value="UGX" data-flag="ugx.jpg">UGX</option>
             <option value="GHS" data-flag="ghx.jpg">GHS</option>
           </select>
-        </div>
-      </div>
+        </p>
       <p class="rates">
         To Buy 1 <span id="selectedFromCurrency">USD</span>: 
         <span id="buyRate">125.25</span>
