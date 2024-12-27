@@ -262,7 +262,7 @@
         const pin = document.getElementById('sign-in-pin').value;
 
         if (storedUsers[name] && storedUsers[name].pin === pin) {
-            // Redirect to the home page
+            // Redirect to the home page without showing any message
             sessionStorage.setItem('currentUser', name); // Save the current user's name
             window.location.href = "home.html"; // Redirect to home.html
         } else {
