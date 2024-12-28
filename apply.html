@@ -196,13 +196,13 @@
 
     <main>
         <form action="/submit" method="post" enctype="multipart/form-data">
-            <label for="email">Email *</label>
+            <label for="email">Email </label>
             <input type="email" id="email" name="email" required>
 
-            <label for="name">Submitter Name *</label>
+            <label for="name">Submitter Name </label>
             <input type="text" id="name" name="name" required>
 
-            <label for="country">Country *</label>
+            <label for="country">Country </label>
             <select id="country" name="country" required onchange="calculateTotalAmount()">
                 <option value="" disabled selected>Select your country</option>
                 <option value="Kenya">Kenya</option>
@@ -210,7 +210,7 @@
                 <option value="Uganda">Uganda</option>
             </select>
 
-            <label for="type-of-request">Type of Request *</label>
+            <label for="type-of-request">Type of Request </label>
             <select id="type-of-request" name="type_of_request" required onchange="toggleReimbursementFields()">
                 <option value="" disabled selected>Select an option</option>
                 <option value="Fuel">Fuel</option>
@@ -231,14 +231,14 @@
                 <option value="Other">Other</option>
             </select>
 
-            <label for="amount">Amount (Per Unit) *</label>
+            <label for="amount">Amount (Per Unit) </label>
             <input type="number" id="amount" name="amount" required oninput="calculateTotalAmount()">
 
             <div id="action-buttons" class="action-buttons">
                 <div class="action-button take-photo" onclick="openCamera()">Take Photo</div>
                 <label class="action-button upload">
                     Upload
-                    <input id="camera-input" type="file" name="receipt" accept="image/*" capture="camera" style="display:none">
+                    <input id="upload-input" type="file" name="receipt" accept="image/*" capture="upload" style="display:none">
                 </label>
                 <div class="action-button reconcile" onclick="showReconcileTextArea()">Reconcile</div>
             </div>
@@ -248,7 +248,7 @@
                 <textarea id="reconciliation-details" name="reconciliation_details" rows="4"></textarea>
             </div>
 
-            <label for="quantity">Quantity *</label>
+            <label for="quantity">Quantity  </label>
             <input type="number" id="quantity" name="quantity" required oninput="calculateTotalAmount()">
 
             <label for="transaction-cost">Transaction Cost (Optional)</label>
@@ -270,6 +270,10 @@
 
         function openCamera() {
             const input = document.getElementById("camera-input");
+            input.click();
+        }
+        function openUpload() {
+            const input = document.getElementById("upload-input");
             input.click();
         }
 
