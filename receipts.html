@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receipt Portal</title>
     <style>
+        /* General Styles */
         body {
             font-family: 'Arial', sans-serif;
             background: #f4f4f9;
             margin: 0;
             padding: 0;
-            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
@@ -30,43 +33,33 @@
             font-size: 1rem;
         }
 
-        /* Navigation Bar */
-    .top-nav {
-      background-color: #004080;
-      color: white;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-        .top-nav .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .top-nav nav {
-            display: flex;
-            gap: 20px;
-        }
-
-        .top-nav nav a {
-            text-decoration: none;
+        nav {
+            background-color: #004080;
             color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        nav a {
+            color: white;
+            font-size: 1rem;
+            margin: 0 15px;
+            text-decoration: none;
             font-weight: bold;
         }
 
-        .top-nav nav a:hover {
+        nav a:hover {
             text-decoration: underline;
         }
 
         main {
+            flex: 1;
             padding: 20px;
         }
 
         #filter-section {
             margin-bottom: 20px;
+            text-align: center;
         }
 
         #filter-section label {
@@ -88,6 +81,7 @@
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            justify-content: center;
         }
 
         .container {
@@ -97,6 +91,7 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 300px;
             flex: 1 1 300px;
+            position: relative;
         }
 
         .container h3 {
@@ -110,105 +105,87 @@
             font-size: 0.9rem;
         }
 
-        @media (max-width: 768px) {
-            .top-nav nav {
-                flex-direction: column;
-                gap: 10px;
-            }
+        .clear-btn {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: red;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .extra-buttons {
+            margin-top: 10px;
+        }
+
+        .extra-buttons button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .photo-btn {
+            background: blue;
+            color: white;
+        }
+
+        .upload-btn {
+            background: green;
+            color: white;
+        }
+
+        .reconcile-btn {
+            background: orange;
+            color: white;
+        }
+
+        .reconcile-area {
+            display: none;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .submit-btn {
+            background: yellow;
+            color: black;
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
         footer {
-            background-color: #004080;
+            background-color: #003366;
             color: white;
             text-align: center;
             padding: 20px 10px;
-            margin-top: 40px;
-        }/* General navigation styles */
-nav {
-  background-color: #003366; /* Same blue color as in the image */
-  text-align: center; /* Center align the links */
-  padding: 10px 0;
-}
-
-nav a {
-  color: white; /* Text color */
-  font-size: 1rem; /* Font size for phones */
-  margin: 0 15px; /* Space between links */
-  text-decoration: none; /* Remove underline */
-  font-weight: bold;
-}
-
-nav a:hover {
-  text-decoration: underline; /* Optional: Underline on hover */
-}
-
-/* Responsive design for smaller screens */
-@media (max-width: 480px) {
-  nav a {
-    font-size: 0.9rem; /* Slightly smaller font size for phones */
-    margin: 0 10px; /* Adjust spacing for smaller screens */
-  }
-}
-
-
-        footer p {
-            margin: 5px 0;
+            margin-top: auto;
         }
 
         footer a {
-            color: #00aaff;
+            color: #ffcc00;
             text-decoration: none;
+            font-weight: bold;
         }
 
         footer a:hover {
             text-decoration: underline;
-        }body {
-    font-family: 'Arial', sans-serif;
-    background: url('un.jpg') no-repeat center center fixed; /* Background image */
-    background-size: cover; /* Make the background cover the entire page */
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
-/* Ensure the body takes full height */
-html, body {
-    height: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Main content should expand to fill the available space */
-main {
-    flex: 1;
-}
-
-/* Footer stays at the bottom */
-footer {
-    background-color: #003366;
-    color: white;
-    text-align: center;
-    padding: 20px 10px;
-    font-size: 0.9rem;
-}
-
-footer a {
-    color: #ffcc00;
-    text-decoration: none;
-    font-weight: bold;
-    margin: 0 5px;
-}
-
-footer a:hover {
-    text-decoration: underline;
-    color: #ffd700;
-}
-
-footer p {
-    margin: 10px 0;
-}
-
-
+        }
     </style>
 </head>
 <body>
@@ -216,55 +193,50 @@ footer p {
         <h1>Receipt Portal</h1>
         <p>Select your name and view your balances and transactions.</p>
     </header>
-  <!-- Navigation Section -->
-  <div class="">
     <nav>
         <a href="home.html">Home</a>
         <a href="apply.html">Apply</a>
         <a href="receipts.html">Receipts</a>
         <a href="contact.html">Contact</a>
     </nav>
-</div>
-    </div>
-    <p>These are the expenses on your name that awaits receipts, Please click on each to upload.</p>
-    
-</header>
     <main>
+        <p>These are the expenses on your name that await receipts. Please click on each to upload.</p>
         <section id="filter-section">
             <label for="name-dropdown">Select Name:</label>
             <select id="name-dropdown">
                 <option value="" disabled selected>Select a name</option>
             </select>
         </section>
-
         <section id="results-section">
             <!-- Data containers will be dynamically added here -->
         </section>
     </main>
-
+    <footer>
+        <p>&copy; 2025 Fh260. All rights reserved.</p>
+        <p>
+            <a href="sign.html">Sign In</a> |
+            <a href="index.html">Back Page</a> |
+            <a href="#" onclick="logoutUser()">Log Out</a>
+        </p>
+    </footer>
     <script>
         const API_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTGUVHqadLXkMMMYTqveJozm3pUww5PLoYXvs0Dcm8U3AuZOsqqCqmCmVXkeSeZ82FQ7ARHPhLW-dWo/pub?gid=1643271877&output=csv';
         const nameDropdown = document.getElementById("name-dropdown");
         const resultsSection = document.getElementById("results-section");
 
         async function fetchData() {
-            try {
-                const response = await fetch(API_URL);
-                const textData = await response.text();
-                const rows = textData.split("\n").slice(1).map(row => row.split(","));
+            const response = await fetch(API_URL);
+            const textData = await response.text();
+            const rows = textData.split("\n").slice(1).map(row => row.split(","));
+            const data = rows.map(row => ({
+                Date: row[0]?.trim(),
+                Name: row[1]?.trim(),
+                TotalAmount: row[2]?.trim(),
+                Reference: row[3]?.trim()
+            }));
 
-                const data = rows.map(row => ({
-                    Date: row[0]?.trim(),
-                    Name: row[1]?.trim(),
-                    TotalAmount: row[2]?.trim(),
-                    Reference: row[3]?.trim()
-                }));
-
-                populateDropdown(data);
-                setupDropdownListener(data);
-            } catch (error) {
-                console.error("Error fetching or parsing data:", error);
-            }
+            populateDropdown(data);
+            setupDropdownListener(data);
         }
 
         function populateDropdown(data) {
@@ -295,34 +267,66 @@ footer p {
                         <p><strong>Date:</strong> ${row.Date}</p>
                         <p><strong>Total Amount:</strong> ${row.TotalAmount}</p>
                         <p><strong>Reference:</strong> ${row.Reference}</p>
+                        <button class="clear-btn">Clear</button>
+                        <div class="hidden extra-buttons">
+                            <button class="photo-btn">Photo</button>
+                            <button class="upload-btn">Upload</button>
+                            <button class="reconcile-btn">Reconcile</button>
+                            <textarea class="reconcile-area" rows="4" cols="30" placeholder="Enter reconciliation details here"></textarea>
+                            <button class="submit-btn">Submit to Clear</button>
+                        </div>
                     `;
+
+                    const clearBtn = container.querySelector(".clear-btn");
+                    const extraButtons = container.querySelector(".extra-buttons");
+                    const photoBtn = container.querySelector(".photo-btn");
+                    const uploadBtn = container.querySelector(".upload-btn");
+                    const reconcileBtn = container.querySelector(".reconcile-btn");
+                    const reconcileArea = container.querySelector(".reconcile-area");
+                    const submitBtn = container.querySelector(".submit-btn");
+
+                    clearBtn.addEventListener("click", () => {
+                        clearBtn.classList.add("hidden");
+                        extraButtons.classList.remove("hidden");
+                    });
+
+                    photoBtn.addEventListener("click", () => {
+                        const input = document.createElement("input");
+                        input.type = "file";
+                        input.accept = "image/*";
+                        input.capture = "camera";
+                        input.click();
+                        submitBtn.style.display = "block";
+                    });
+
+                    uploadBtn.addEventListener("click", () => {
+                        const input = document.createElement("input");
+                        input.type = "file";
+                        input.click();
+                        submitBtn.style.display = "block";
+                    });
+
+                    reconcileBtn.addEventListener("click", () => {
+                        reconcileArea.style.display = "block";
+                        submitBtn.style.display = "block";
+                    });
+
+                    submitBtn.addEventListener("click", () => {
+                        container.innerHTML = `<p>Task completed and cleared.</p>`;
+                    });
+
                     resultsSection.appendChild(container);
                 });
             });
         }
 
         fetchData();
-    </script>
 
-<!-- Footer -->
-<footer>
-    <p>&copy; 2025 Fh260. All rights reserved.</p>
-    <p>
-      <a href="sign.html">Sign In</a> | 
-      <a href="index.html">Back Page</a> | 
-      <a href="#" onclick="logoutUser()">Log Out</a>
-    </p>
-  </footer>
-  
-  <script>
-    // Function to handle user logout
-    function logoutUser() {
-      // Clear user session or data (example for localStorage)
-      localStorage.clear(); // Adjust based on your storage method (session, cookies, etc.)
-  
-      // Redirect to a login or home page
-      alert("You have successfully logged out.");
-      window.location.href = "sign.html"; // Redirect to the sign-in page
-    }
-  </script>
-  
+        function logoutUser() {
+            localStorage.clear();
+            alert("You have successfully logged out.");
+            window.location.href = "sign.html";
+        }
+    </script>
+</body>
+</html>
