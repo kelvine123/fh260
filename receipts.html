@@ -57,26 +57,6 @@
             padding: 20px;
         }
 
-        #filter-section {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        #filter-section label {
-            font-size: 1rem;
-            font-weight: bold;
-            margin-right: 10px;
-        }
-
-        #filter-section select {
-            padding: 10px;
-            font-size: 1rem;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            width: 100%;
-            max-width: 300px;
-        }
-
         #results-section {
             display: flex;
             flex-wrap: wrap;
@@ -113,27 +93,28 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 8cm;
+            height: 1cm;
             background: red;
             color: white;
         }
 
-        .hidden {
-            display: none;
-        }
-
         .extra-buttons {
+            display: flex;
+            justify-content: space-between;
             margin-top: 10px;
+            gap: 10px;
+            display: none; /* Hidden initially */
         }
 
         .extra-buttons button {
-            display: block;
-            margin: 10px 0;
-            padding: 10px;
+            width: 2cm;
+            height: 1cm;
+            padding: 5px;
             font-size: 0.9rem;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
         }
 
         .photo-btn {
@@ -151,12 +132,6 @@
             color: white;
         }
 
-        .reconcile-area {
-            display: none;
-            margin-top: 10px;
-            width: 100%;
-        }
-
         .submit-btn {
             background: yellow;
             color: black;
@@ -167,6 +142,14 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 8cm;
+            height: 1cm;
+        }
+
+        .reconcile-area {
+            display: none;
+            margin-top: 10px;
+            width: 100%;
         }
 
         footer {
@@ -268,13 +251,13 @@
                         <p><strong>Total Amount:</strong> ${row.TotalAmount}</p>
                         <p><strong>Reference:</strong> ${row.Reference}</p>
                         <button class="clear-btn">Clear</button>
-                        <div class="hidden extra-buttons">
+                        <div class="extra-buttons">
                             <button class="photo-btn">Photo</button>
                             <button class="upload-btn">Upload</button>
                             <button class="reconcile-btn">Reconcile</button>
-                            <textarea class="reconcile-area" rows="4" cols="30" placeholder="Enter reconciliation details here"></textarea>
-                            <button class="submit-btn">Submit to Clear</button>
                         </div>
+                        <textarea class="reconcile-area" rows="4" cols="30" placeholder="Enter reconciliation details here"></textarea>
+                        <button class="submit-btn">Submit to Clear</button>
                     `;
 
                     const clearBtn = container.querySelector(".clear-btn");
@@ -286,8 +269,8 @@
                     const submitBtn = container.querySelector(".submit-btn");
 
                     clearBtn.addEventListener("click", () => {
-                        clearBtn.classList.add("hidden");
-                        extraButtons.classList.remove("hidden");
+                        clearBtn.style.display = "none";
+                        extraButtons.style.display = "flex";
                     });
 
                     photoBtn.addEventListener("click", () => {
@@ -296,19 +279,16 @@
                         input.accept = "image/*";
                         input.capture = "camera";
                         input.click();
-                        submitBtn.style.display = "block";
                     });
 
                     uploadBtn.addEventListener("click", () => {
                         const input = document.createElement("input");
                         input.type = "file";
                         input.click();
-                        submitBtn.style.display = "block";
                     });
 
                     reconcileBtn.addEventListener("click", () => {
                         reconcileArea.style.display = "block";
-                        submitBtn.style.display = "block";
                     });
 
                     submitBtn.addEventListener("click", () => {
