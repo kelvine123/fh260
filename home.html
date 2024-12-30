@@ -343,70 +343,46 @@ header p {
         const receiptsValue = await fetchData(sheetUrls.receipts, name);
         const balanceValue = await fetchData(sheetUrls.balance, name);
 
-        document.getElementById("expenditureOutput").innerHTML = `The value for ${name} is:</p> Ksh. ${expenditureValue}`;
-        document.getElementById("receiptsOutput").innerHTML = `The value for ${name} is: </p>Ksh. ${receiptsValue}`;
-        document.getElementById("balanceOutput").innerHTML = `The balance for ${name} is: </p>Ksh. ${balanceValue}`;
+        document.getElementById("expenditureOutput").innerHTML = `Expenditure for ${name}: Ksh. ${expenditureValue}`;
+        document.getElementById("receiptsOutput").innerHTML = `Receipts for ${name}: Ksh. ${receiptsValue}`;
+        document.getElementById("balanceOutput").innerHTML = `Balance for ${name}: Ksh. ${balanceValue}`;
     }
-</script>
 
-      
-      </body>
-      </html>
-    </div>
-    <div class="feature forex-calculator">
-      <h3>Forex Calculator</h3>
-      <div class="calculator-container">
-        <div class="currency">
-          <img src="usa.webp" alt="USA Flag" id="fromFlag" class="flag">
-          <select id="fromCurrency">
-            <option value="USD" data-flag="usa.webp">USD</option>
-            <option value="EUR" data-flag="euro.webp">EUR</option>
-            <option value="GBP" data-flag="gbp.webp">GBP</option>
-          </select>
-        </div>
-        <div class="conversion-arrow">⇄</div>
-        <div class="currency">
-          <img src="ksh.webp" alt="Kenya Flag" id="toFlag" class="flag">
-          <select id="toCurrency">
-            <option value="KES" data-flag="ksh.webp">KES</option>
-            <option value="UGX" data-flag="ugx.jpg">UGX</option>
-            <option value="GHS" data-flag="ghx.jpg">GHS</option>
-          </select>
-        </p>
-      <p class="rates">
-        To Buy 1 <span id="selectedFromCurrency">USD</span>: 
-        <span id="buyRate">125.25</span>
-        <br>
-        To Sell 1 <span id="selectedFromCurrency2">USD</span>: 
-        <span id="sellRate">131.25</span>
-      </p>
-    </div>
-  </section>
+    document.addEventListener('DOMContentLoaded', () => {
+        const userName = sessionStorage.getItem('currentUser');
+        const userInitials = sessionStorage.getItem('userInitials');
 
- <!-- Footer -->
-<footer>
-  <p>&copy; 2025 Fh260. All rights reserved.</p>
-  <p>
-    <a href="sign.html">Sign In</a> | 
-    <a href="index.html">Back Page</a> | 
-    <a href="#" onclick="logoutUser()">Log Out</a>
-  </p>
-</footer>
+        if (!userName) {
+            alert("You must log in first.");
+            window.location.href = "sign.html"; // Redirect to login page if not logged in
+        } else {
+            // Display user initials
+            const userCircle = document.createElement('div');
+            userCircle.textContent = userInitials;
+            userCircle.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                background: #007bff;
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+            `;
+            document.body.appendChild(userCircle);
+        }
+    });
 
-<script>
-  // Function to handle user logout
-  function logoutUser() {
-    // Clear user session or data (example for localStorage)
-    localStorage.clear(); // Adjust based on your storage method (session, cookies, etc.)
+    function logoutUser() {
+        sessionStorage.clear(); // Clear all session data
+        alert("You have successfully logged out.");
+        window.location.href = "sign.html"; // Redirect to login page
+    }
 
-    // Redirect to a login or home page
-    alert("You have successfully logged out.");
-    window.location.href = "sign.html"; // Redirect to the sign-in page
-  }
-</script>
-
-
-  <script>
     const fromCurrency = document.getElementById("fromCurrency");
     const toCurrency = document.getElementById("toCurrency");
     const fromFlag = document.getElementById("fromFlag");
@@ -420,36 +396,32 @@ header p {
     toCurrency.addEventListener("change", updateCurrency);
 
     function updateCurrency() {
-      const selectedFromOption = fromCurrency.options[fromCurrency.selectedIndex];
-      const selectedToOption = toCurrency.options[toCurrency.selectedIndex];
+        const selectedFromOption = fromCurrency.options[fromCurrency.selectedIndex];
+        const selectedToOption = toCurrency.options[toCurrency.selectedIndex];
 
-      fromFlag.src = selectedFromOption.dataset.flag;
-      toFlag.src = selectedToOption.dataset.flag;
+        fromFlag.src = selectedFromOption.dataset.flag;
+        toFlag.src = selectedToOption.dataset.flag;
 
-      selectedFromCurrency.textContent = selectedFromOption.value;
-      selectedFromCurrency2.textContent = selectedFromOption.value;
+        selectedFromCurrency.textContent = selectedFromOption.value;
+        selectedFromCurrency2.textContent = selectedFromOption.value;
 
-      fetchExchangeRates(selectedFromOption.value, selectedToOption.value);
+        fetchExchangeRates(selectedFromOption.value, selectedToOption.value);
     }
 
     async function fetchExchangeRates(base, target) {
-      try {
-        const response = await fetch(
-          `https://api.exchangerate-api.com/v4/latest/${base}`
-        );
-        const data = await response.json();
+        try {
+            const response = await fetch(`https://api.exchangerate-api.com/v4/latest/${base}`);
+            const data = await response.json();
 
-        const buyRateValue = data.rates[target];
-        const sellRateValue = buyRateValue * 1.05;
+            const buyRateValue = data.rates[target];
+            const sellRateValue = buyRateValue * 1.05;
 
-        buyRate.textContent = buyRateValue.toFixed(2);
-        sellRate.textContent = sellRateValue.toFixed(2);
-      } catch (error) {
-        console.error("Error fetching exchange rates:", error);
-      }
+            buyRate.textContent = buyRateValue.toFixed(2);
+            sellRate.textContent = sellRateValue.toFixed(2);
+        } catch (error) {
+            console.error("Error fetching exchange rates:", error);
+        }
     }
 
     fetchExchangeRates("USD", "KES");
-  </script>
-</body>
-</html>
+</script>
