@@ -300,9 +300,25 @@
                     });
     
                     submitBtn.addEventListener("click", () => {
-                        container.innerHTML = `<p>Task completed and cleared.</p>`;
-                    });
+    const receiptValue = receiptInput.value.trim();
     
+    // Check if an error message already exists and remove it
+    let errorMessage = container.querySelector(".error-message");
+    if (errorMessage) {
+        errorMessage.remove();
+    }
+
+    if (receiptValue === "" || isNaN(receiptValue) || receiptValue <= 0) {
+        errorMessage = document.createElement("p");
+        errorMessage.className = "error-message";
+        errorMessage.innerText = "Please enter a valid receipt amount.";
+        container.appendChild(errorMessage); // Add the error message to the container
+        return;
+    }
+
+    container.innerHTML = `<p>Task completed and cleared.</p>`;
+});
+
                     resultsSection.appendChild(container);
                 });
             });
