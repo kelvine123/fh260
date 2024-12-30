@@ -179,8 +179,8 @@
     <nav>
         <a href="home.html">Home</a>
         <a href="apply.html">Apply</a>
+        <a href="receipts.html">Receipts</a>
        
-      
     </nav>
     <main>
         <p>These are the expenses on your name that await receipts. Please click on each to upload.</p>
@@ -206,7 +206,7 @@
         const API_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTGUVHqadLXkMMMYTqveJozm3pUww5PLoYXvs0Dcm8U3AuZOsqqCqmCmVXkeSeZ82FQ7ARHPhLW-dWo/pub?gid=1643271877&output=csv';
         const nameDropdown = document.getElementById("name-dropdown");
         const resultsSection = document.getElementById("results-section");
-    
+
         async function fetchData() {
             const response = await fetch(API_URL);
             const textData = await response.text();
@@ -217,11 +217,11 @@
                 TotalAmount: row[2]?.trim(),
                 Reference: row[3]?.trim()
             }));
-    
+
             populateDropdown(data);
             setupDropdownListener(data);
         }
-    
+
         function populateDropdown(data) {
             const uniqueNames = [...new Set(data.map(item => item.Name))];
             uniqueNames.forEach(name => {
@@ -233,18 +233,18 @@
                 }
             });
         }
-    
+
         function setupDropdownListener(data) {
             nameDropdown.addEventListener("change", () => {
                 const selectedName = nameDropdown.value;
                 resultsSection.innerHTML = "";
-    
+
                 const filteredData = data.filter(row => row.Name === selectedName);
-    
+
                 filteredData.forEach(row => {
                     const container = document.createElement("div");
                     container.classList.add("container");
-    
+
                     container.innerHTML = `
                         <h3>${row.Name}</h3>
                         <p><strong>Date:</strong> ${row.Date}</p>
@@ -260,7 +260,7 @@
                         <input type="number" class="receipt-input" placeholder="Enter receipt amount" style="display: none; width: 100%; margin-top: 10px;">
                         <button class="submit-btn" style="display: none;">Submit to Clear</button>
                     `;
-    
+
                     const clearBtn = container.querySelector(".clear-btn");
                     const extraButtons = container.querySelector(".extra-buttons");
                     const photoBtn = container.querySelector(".photo-btn");
@@ -269,81 +269,139 @@
                     const reconcileArea = container.querySelector(".reconcile-area");
                     const receiptInput = container.querySelector(".receipt-input");
                     const submitBtn = container.querySelector(".submit-btn");
-    
+
                     clearBtn.addEventListener("click", () => {
                         clearBtn.style.display = "none";
                         extraButtons.style.display = "flex";
                     });
-    
+
                     photoBtn.addEventListener("click", () => {
                         const input = document.createElement("input");
                         input.type = "file";
                         input.accept = "image/*";
                         input.capture = "camera";
                         input.click();
+
+                        const addAnotherPhotoBtn = document.createElement("button");
+                        addAnotherPhotoBtn.textContent = "Add Another Photo";
+                        addAnotherPhotoBtn.style.cssText = `
+                            display: block;
+                            margin-top: 10px;
+                            padding: 5px 10px;
+                            background-color: #007bff;
+                            color: white;
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        `;
+
+                        container.appendChild(addAnotherPhotoBtn);
+
+                        addAnotherPhotoBtn.addEventListener("click", () => {
+                            const newInput = document.createElement("input");
+                            newInput.type = "file"
+                            newInput.accept = "image/*";
+                            newInput.capture = "camera";
+                            newInput.style.cssText = `
+                                display: block;
+                                margin-top: 5px;
+                            `;
+                            container.appendChild(newInput);
+                        });
+
                         receiptInput.style.display = "block";
                         submitBtn.style.display = "block";
                     });
-    
+
                     uploadBtn.addEventListener("click", () => {
                         const input = document.createElement("input");
                         input.type = "file";
                         input.click();
+
+                        const addAnotherUploadBtn = document.createElement("button");
+                        addAnotherUploadBtn.textContent = "Add Another Upload";
+                        addAnotherUploadBtn.style.cssText = `
+                            display: block;
+                            margin-top: 10px;
+                            padding: 5px 10px;
+                            background-color: #28a745;
+                            color: white;
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        `;
+
+                        container.appendChild(addAnotherUploadBtn);
+
+                        addAnotherUploadBtn.addEventListener("click", () => {
+                            const newInput = document.createElement("input");
+                            newInput.type = "file";
+                            newInput.style.cssText = `
+                                display: block;
+                                margin-top: 5px;
+                            `;
+                            container.appendChild(newInput);
+                        });
+
                         receiptInput.style.display = "block";
                         submitBtn.style.display = "block";
                     });
-    
+
                     reconcileBtn.addEventListener("click", () => {
                         reconcileArea.style.display = "block";
                         receiptInput.style.display = "block";
                         submitBtn.style.display = "block";
                     });
-    
+
                     submitBtn.addEventListener("click", () => {
-    const receiptValue = receiptInput.value.trim();
-    
-    // Check if an error message already exists and remove it
-    let errorMessage = container.querySelector(".error-message");
-    if (errorMessage) {
-        errorMessage.remove();
-    }
+                        const receiptValue = receiptInput.value.trim();
 
-    if (receiptValue === "" || isNaN(receiptValue) || receiptValue <= 0) {
-        errorMessage = document.createElement("p");
-        errorMessage.className = "error-message";
-        errorMessage.innerText = "Please enter a valid receipt amount.";
-        container.appendChild(errorMessage); // Add the error message to the container
-        return;
-    }
+                        let errorMessage = container.querySelector(".error-message");
+                        if (errorMessage) {
+                            errorMessage.remove();
+                        }
 
-    container.innerHTML = `<p>Task completed and cleared.</p>`;
-});
+                        if (receiptValue === "" || isNaN(receiptValue) || receiptValue <= 0) {
+                            errorMessage = document.createElement("p");
+                            errorMessage.className = "error-message";
+                            errorMessage.innerText = "Please enter a valid receipt amount.";
+                            errorMessage.style.cssText = `
+                                color: red;
+                                font-size: 0.9rem;
+                                margin-top: 10px;
+                            `;
+                            container.appendChild(errorMessage);
+                            return;
+                        }
+
+                        container.innerHTML = `<p>Task completed and cleared.</p>`;
+                    });
 
                     resultsSection.appendChild(container);
                 });
             });
         }
-        document.addEventListener('DOMContentLoaded', () => {
-        const userName = sessionStorage.getItem('currentUser');
-        const userInitials = sessionStorage.getItem('userInitials');
 
-        if (!userName) {
-            alert("You must log in first.");
-            window.location.href = "sign.html"; // Redirect to login page if not logged in
-        } else {
-            // Display user initials in a small round yellow circle
-            const userCircle = document.createElement('div');
-            userCircle.textContent = userInitials;
-          
-            document.body.appendChild(userCircle);
-        }
-    });
+        document.addEventListener('DOMContentLoaded', () => {
+            const userName = sessionStorage.getItem('currentUser');
+            const userInitials = sessionStorage.getItem('userInitials');
+
+            if (!userName) {
+                alert("You must log in first.");
+                window.location.href = "sign.html";
+            } else {
+                const userCircle = document.createElement('div');
+                userCircle.textContent = userInitials;
+                
+                document.body.appendChild(userCircle);
+            }
+        });
+
         fetchData();
-    
+
         function logoutUser() {
-            localStorage.clear();
+            sessionStorage.clear();
             alert("You have successfully logged out.");
             window.location.href = "sign.html";
         }
     </script>
-    
