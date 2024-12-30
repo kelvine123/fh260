@@ -261,7 +261,36 @@
         </form>
     </main>
 
-    <script>
+    <script>document.addEventListener('DOMContentLoaded', () => {
+        const userName = sessionStorage.getItem('currentUser');
+        const userInitials = sessionStorage.getItem('userInitials');
+
+        if (!userName) {
+            alert("You must log in first.");
+            window.location.href = "sign.html"; // Redirect to login page if not logged in
+        } else {
+            // Display user initials in a small round yellow circle
+            const userCircle = document.createElement('div');
+            userCircle.textContent = userInitials;
+            userCircle.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                background: brown;
+                color: black;
+                font-size: 1rem;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+            `;
+            document.body.appendChild(userCircle);
+        }
+    });
+
         function toggleReimbursementFields() {
             const typeOfRequest = document.getElementById("type-of-request").value;
             const actionButtons = document.getElementById("action-buttons");
