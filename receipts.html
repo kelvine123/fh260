@@ -179,7 +179,7 @@
     <nav>
         <a href="home.html">Home</a>
         <a href="apply.html">Apply</a>
-      
+        
     </nav>
     <main>
         <p>These are the expenses on your name that await receipts. Please click on each to upload.</p>
@@ -368,7 +368,23 @@ uploadBtn.addEventListener("click", () => {
             } else {
                 const userCircle = document.createElement('div');
                 userCircle.textContent = userInitials;
-                
+                userCircle.style.cssText = `
+                    position: fixed;
+                    top: 10px;
+                    right: 10px;
+                    width: 40px;
+                    height: 40px;
+                    background: blue;
+                    color: black;
+                    font-weight: bold;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                `;
+                document.body.appendChild(userCircle);
+            }
+        });
     
         fetchData();
     
