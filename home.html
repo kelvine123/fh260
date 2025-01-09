@@ -395,7 +395,64 @@ header p {
         <span id="sellRate">131.25</span>
       </p>
     </div>
-  </section>
+  </section><style>
+  /* Container for the buttons */
+  .button-container {
+    display: flex;
+    justify-content: center; /* Center the buttons horizontally */
+    gap: 20px; /* Space between the buttons */
+    margin-top: 20px; /* Space above the buttons */
+  }
+
+  /* General button styles */
+  .btn {
+    display: inline-block;
+    width: 3cm;
+    height: 1cm; /* Set height to 2cm */
+    padding: 0 30px; /* Horizontal padding */
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    line-height: 1cm; /* Vertically center text */
+  }
+
+  /* Track button (Orange) */
+  .btn-track {
+    background-color: orange;
+  }
+
+  .btn-track:hover {
+    background-color: #ff8c00; /* Darker orange on hover */
+  }
+
+  /* Funds button (Green) */
+  .btn-funds {
+    background-color: green;
+  }
+
+  .btn-funds:hover {
+    background-color: #006400; /* Darker green on hover */
+  }.button-container {
+  display: flex;
+  gap: 1cm; /* Sets a 5 cm space between the buttons */
+}
+</style>
+
+<!-- Buttons container -->
+<div class="button-container">
+  <!-- Track Button -->
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSf3mzAT24yKnijPuw9rf1ThODw9NFmbjFiBPLL8a0MqjwIczg/viewform" 
+     class="btn btn-track" 
+     target="_blank">Track</a>
+  <!-- Funds Button -->
+  <a href="https://feji.us/ufkfh1" 
+     class="btn btn-funds" 
+     target="_blank">Funds</a>
+</div>
+
 
  <!-- Footer -->
 <footer>
