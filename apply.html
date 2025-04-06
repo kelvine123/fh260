@@ -3,161 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fund Request Portal</title>
+    <title>Fund Request Form</title>
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #f4f4f9;
-            margin: 0;
-            padding: 0;
-            color: #333;
-        }
-
-        header {
-            text-align: center;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.8);
+        /* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+} header {
+            background-color: #003366; /* KCAU's branding color */
             color: white;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-        }
-
-        header p {
-            font-size: 1.2rem;
-            margin: 5px 0 0;
-        }
-
-        .top-nav {
-            background-color: #004080;
-            color: white;
-            padding: 10px 20px;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
-        .top-nav .logo {
-            font-size: 24px;
-            font-weight: bold;
+        header .logo img {
+            height: 40px;
         }
 
-        .top-nav nav {
+        header nav ul {
             display: flex;
+            list-style: none;
             gap: 20px;
         }
 
-        .top-nav nav a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-        }
+/* Container to hold all content */
+.container {
+    width: 95%;
+    max-width: 600px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
 
-        .top-nav nav a:hover {
-            text-decoration: underline;
-        }
+/* Heading style */
+h1 {
+    text-align: center;
+    color: #333;
+}
 
-        main {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 30px 10px;
-        }
+/* Form elements styles */
+select, input, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
 
-        form {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 800px;
-            width: 100%;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            color: #333;
-        }
+/* Button specific styles */
+button {
+    cursor: pointer;
+    border: none;
+}
 
-        label {
-            font-weight: bold;
-            margin-bottom: 8px;
-            display: block;
-        }
+/* Custom buttons */
+.add-model-button {
+    background-color: #FFC300;
+    color: #333;
+}
 
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 14px;
-        }
+.remove-button {
+    background-color: #B22222;
+    color: white;
+    width: 2cm;
+    height: 1cm;
+    border: none;
+    text-align: center;
+    display: inline-block;
+}
 
-        input:focus, select:focus, textarea:focus {
-            border-color: #007bff;
-            outline: none;
-        }
+/* Cart-item style */
+.cart-item {
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        textarea {
-            resize: vertical;
-        }
+/* Hidden class for elements */
+.hidden {
+    display: none;
+}
 
-        .action-buttons {
-            display: none;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
+/* Total display style */
+.total-display {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 15px;
+}
 
-        .action-button {
-            flex: 1;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            text-align: center;
-        }
+/* Table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
 
-        .action-button.take-photo {
-            background-color: #007bff;
-            color: white;
-        }
+th, td {
+    border: 1px solid #ddd;
+    padding: 5px;
+    text-align: left;
+}
 
-        .action-button.upload {
-            background-color: #28a745;
-            color: white;
-        }
+th {
+    background-color: #f2f2f2;
+}
 
-        .action-button.reconcile {
-            background-color: #ffc107;
-            color: black;
-        }
+/* Subcategory container styles */
+.subcategory-container {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
+}
 
-        .action-button:hover {
-            filter: brightness(0.9);
-        }
+/* Subcategory header styles */
+.subcategory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .hidden {
-            display: none;
-        }
+/* Button styles for proceed and send receipt */
+#proceedButton, #sendReceiptButton {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
+    display: none;
+}
 
-        button {
-            background-color: #007bff;
-            color: white;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            width: 100%;
-        }
+/* Responsive design - Media Queries */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
 
-        button:hover {
-            background-color: #0056b3;
-        }/* Footer */
-    footer {
+    /* Adjust the container width */
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+
+    /* Adjust input and button width for small screens */
+    select, input, button {
+        width: 100%;
+        padding: 12px;
+    }
+
+    /* Make the buttons and input fields larger for ease of use on mobile */
+    .add-model-button, .remove-button, #proceedButton, #sendReceiptButton {
+        padding: 15px;
+    }
+
+    /* Adjust table padding for small screens */
+    th, td {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    /* Hide the subcategory container header buttons in smaller screens */
+    .subcategory-header button {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Adjust font size for very small screens */
+    body {
+        font-size: 12px;
+    }
+
+    /* Stack buttons and inputs for small screens */
+    select, input, button {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .remove-button {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    /* Adjust the size of the remove button */
+    .remove-button {
+        width: 1.5cm;
+        height: 1cm;
+    }
+
+    /* Reduce the size of subcategory container */
+    .subcategory-container {
+        padding: 8px;
+    }
+}footer {
       background-color: #004080;
       color: white;
       text-align: center;
@@ -175,166 +224,407 @@
       text-decoration: underline;
     }
 
+
     </style>
 </head>
-<body>
+<body><!-- Header Section -->
     <header>
-        <h1>Fund Request Portal</h1>
-        <p>Submit your fund requests easily and efficiently.</p>
+        <div class="logo">
+            <img src="logo.png" alt="KCAU Logo">
+        </div>
+        <nav>
+            <ul>
+                
+                
+            </ul>
+        </nav>
     </header>
 
-    <!-- Navigation Bar -->
-    <div class="top-nav">
-        <div class="logo"></div>
-        <nav>
-            
-            <a href="home.html">Home</a>
-            <a href="receipts.html">Receipts</a>
-          
-        </nav>
+    <h1>Fund Request</h1>
+
+    <label for="requestType">Request Type:</label>
+    <select id="requestType">
+        <option value="New">New</option>
+        <option value="Reimbursement">Reimbursement</option>
+    </select><!-- Add the new buttons section in your container -->
+    <div id="reimbursementButtons" class="hidden">
+        <button id="uploadButton" class="action-button">Upload</button>
+        <button id="photoButton" class="action-button">Photo</button>
+        <button id="reconcileButton" class="action-button">Reconcile</button>
     </div>
+    
 
-    <main>
-        <form action="/submit" method="post" enctype="multipart/form-data">
-            <label for="email">Email </label>
-            <input type="email" id="email" name="email" required>
+    <label for="category">Category:</label>
+    <select id="category">
+        <option value="" disabled selected>Select category</option>
+        <option value="Fuel">Fuel</option>
+        <option value="Borehole Expenses">Borehole Expenses</option>
+        <option value="Construction">Construction</option>
+        <option value="Parts/Supplies">Parts/Supplies</option>
+        <option value="Permits">Permits</option>
+        <option value="Internet/Electricity">Internet/Electricity</option>
+        <option value="Rent">Rent</option>
+        <option value="Vehicle Repair">Vehicle Repair</option>
+        <option value="Expeditions">Expeditions</option>
+        <option value="Transport">Transport</option>
+        <option value="Meals">Meals</option>
+        <option value="Accommodations">Accommodations</option>
+        <option value="Projects">Projects</option>
+        <option value="Vehicle Service">Vehicle Service</option>
+        <option value="Other">Other</option>
+    </select>
 
-            <label for="name">Submitter Name </label>
-            <input type="text" id="name" name="name" required>
+    <label for="subCategory">Sub-category:</label>
+    <select id="subCategory">
+        <option value="None">None</option>
+    </select>
+    <input type="text" id="otherSubCategory" class="hidden" placeholder="Specify Other Sub-category">
 
-            <label for="country">Country </label>
-            <select id="country" name="country" required onchange="calculateTotalAmount()">
-                <option value="" disabled selected>Select your country</option>
-                <option value="Kenya">Kenya</option>
-                <option value="Ghana">Ghana</option>
-                <option value="Uganda">Uganda</option>
-            </select>
+    <button class="add-model-button" onclick="addModel()">Add sub-category</button>
 
-            <label for="type-of-request">Type of Request </label>
-            <select id="type-of-request" name="type_of_request" required onchange="toggleReimbursementFields()">
-                <option value="" disabled selected>Select an option</option>
-                <option value="Fuel">Fuel</option>
-                <option value="Borehole Expenses">Borehole Expenses</option>
-                <option value="Construction">Construction (includes surveys/plaques)</option>
-                <option value="Parts/Supplies">Parts/Supplies</option>
-                <option value="Permits">Permits</option>
-                <option value="Internet/Electricity">Internet/Electricity</option>
-                <option value="Rent">Rent</option>
-                <option value="Vehicle Repair">Vehicle Repair</option>
-                <option value="Expeditions">Expeditions</option>
-                <option value="Transport">Transport</option>
-                <option value="Meals">Meals</option>
-                <option value="Accommodations">Accommodations</option>
-                <option value="Projects">Projects</option>
-                <option value="Vehicle Service">Vehicle Service</option>
-                <option value="Reimbursement">Reimbursement</option>
-                <option value="Other">Other</option>
-            </select>
+    <div class="models"></div>
+    <div id="summary" class="hidden"></div>
+    <button id="proceedButton" onclick="proceed()">Proceed</button>
+    <button id="sendReceiptButton" onclick="sendAndDownloadReceipt()">Send Receipt</button>
+</div>
+<!-- Add a container for the reconciliation letter -->
+<div id="reconcileContainer"></div>
 
-            <label for="amount">Amount (Per Unit) </label>
-            <input type="number" id="amount" name="amount" required oninput="calculateTotalAmount()">
+<script>
+    document.getElementById('category').addEventListener('change', function () {
+        const subCategory = document.getElementById('subCategory');
+        subCategory.innerHTML = "";
+        const selectedCategory = this.value;
+        let options = ["None"];
 
-            <div id="action-buttons" class="action-buttons">
-                <div class="action-button take-photo" onclick="openCamera()">Take Photo</div>
-                <label class="action-button upload">
-                    Upload
-                    <input id="upload-input" type="file" name="receipt" accept="image/*" capture="upload" style="display:none">
-                </label>
-                <div class="action-button reconcile" onclick="showReconcileTextArea()">Reconcile</div>
-            </div>
+        const subCategories = {
+            "Parts/Supplies": ["Rods", "Centralizers", "Rubber", "Casings", "Drill Bits", "Mud Pumps", "Water Hoses", "Filters", "Bearings", "Grease", "Other"],
+            "Borehole Expenses": ["Drilling Permits", "Surveying", "Pump Installation", "Water Testing", "Casing Pipes", "Grouting", "Other"],
+            "Construction": ["Cement", "Sand", "Gravel", "Bricks", "Iron Sheets", "Nails", "Timber", "Other"],
+            "Vehicle Repair": ["Tires", "Battery", "Oil Change", "Brake Pads", "Suspension", "Other"]
+        };
 
-            <div id="reconcile-textarea" class="hidden">
-                <label for="reconciliation-details">Reconciliation Details *</label>
-                <textarea id="reconciliation-details" name="reconciliation_details" rows="4"></textarea>
-            </div>
-
-            <label for="quantity">Quantity  </label>
-            <input type="number" id="quantity" name="quantity" required oninput="calculateTotalAmount()">
-
-            <label for="transaction-cost">Transaction Cost (Optional)</label>
-            <input type="number" id="transaction-cost" name="transaction_cost" value="0" oninput="calculateTotalAmount()">
-
-            <label for="total-amount">Total Amount</label>
-            <input type="text" id="total-amount" name="total_amount" readonly>
-
-            <button type="submit">Submit Request</button>
-        </form>
-    </main>
-
-    <script>document.addEventListener('DOMContentLoaded', () => {
-        const userName = sessionStorage.getItem('currentUser');
-        const userInitials = sessionStorage.getItem('userInitials');
-
-        if (!userName) {
-            alert("You must log in first.");
-            window.location.href = "sign.html"; // Redirect to login page if not logged in
+        if (subCategories[selectedCategory]) {
+            options = options.concat(subCategories[selectedCategory]);
         } else {
-            // Display user initials in a small round yellow circle
-            const userCircle = document.createElement('div');
-            userCircle.textContent = userInitials;
-           
-            document.body.appendChild(userCircle);
+            options.push("Other");
+        }
+
+        options.forEach(option => {
+            const opt = document.createElement("option");
+            opt.value = option;
+            opt.textContent = option;
+            subCategory.appendChild(opt);
+        });
+    });document.getElementById('requestType').addEventListener('change', function () {
+    const reimbursementButtons = document.getElementById('reimbursementButtons');
+    if (this.value === "Reimbursement") {
+        reimbursementButtons.classList.remove('hidden');  // Show the buttons
+    } else {
+        reimbursementButtons.classList.add('hidden');  // Hide the buttons
+    }
+});
+
+
+    document.getElementById('subCategory').addEventListener('change', function () {
+        const otherInput = document.getElementById("otherSubCategory");
+        this.value === "Other" ? otherInput.classList.remove("hidden") : otherInput.classList.add("hidden");
+    });
+
+    function addModel() {
+    const reqType = document.getElementById('requestType');
+    const category = document.getElementById('category');
+    const subCategory = document.getElementById('subCategory');
+    const otherSubCategoryInput = document.getElementById("otherSubCategory");
+
+    let selectedModel = subCategory.value;
+
+    if (selectedModel === "None") return;
+
+    if (selectedModel === "Other") {
+        selectedModel = otherSubCategoryInput.value.trim();
+        if (!selectedModel) {
+            alert("Please enter a sub-category name.");
+            return;
+        }
+    }
+
+    // Lock the dropdowns after first sub-category is added
+    reqType.disabled = true;
+    category.disabled = true;
+
+    const modelContainer = document.createElement('div');
+    modelContainer.className = 'subcategory-container';
+    modelContainer.innerHTML = `
+        <div class="subcategory-header">
+            <h2>${selectedModel}</h2>
+            <button class="remove-button" onclick="removeSubCategory(this)">Remove</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Amount</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" placeholder="Description"></td>
+                    <td><input type="number" class="amount" placeholder="Amount"></td>
+                    <td><input type="number" class="quantity" placeholder="Quantity"></td>
+                </tr>
+            </tbody>
+        </table>
+    `;
+    document.querySelector('.models').appendChild(modelContainer);
+
+    // Reset and hide the "Other" input field
+    otherSubCategoryInput.value = "";
+    otherSubCategoryInput.classList.add("hidden");
+}
+document.getElementById('photoButton').addEventListener('click', function () {
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                const video = document.createElement('video');
+                video.srcObject = stream;
+                video.play();
+
+                // Create a canvas to take a snapshot
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+
+                // Create a button to take the snapshot
+                const captureButton = document.createElement('button');
+                captureButton.textContent = "Capture Photo";
+                captureButton.style.marginTop = "10px";
+
+                captureButton.addEventListener('click', function () {
+                    // Capture the photo from the video stream
+                    canvas.width = video.videoWidth;
+                    canvas.height = video.videoHeight;
+                    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                    // Convert the canvas image to a data URL (base64-encoded string)
+                    const photoDataUrl = canvas.toDataURL('image/png');
+
+                    // Display the photo or save it
+                    const img = document.createElement('img');
+                    img.src = photoDataUrl;
+                    img.style.width = "200px"; // Resize for display
+                    document.body.appendChild(img);
+
+                    // Optionally, you can save it to a server or locally
+                    savePhoto(photoDataUrl);
+
+                    // Stop the video stream after capture
+                    stream.getTracks().forEach(track => track.stop());
+                });
+
+                // Add video and capture button to the DOM
+                const videoContainer = document.createElement('div');
+                videoContainer.appendChild(video);
+                videoContainer.appendChild(captureButton);
+                document.body.appendChild(videoContainer);
+            })
+            .catch(function (error) {
+                console.log("Error accessing the camera: ", error);
+            });
+    } else {
+        alert("Camera not available.");
+    }
+});
+
+// Save the captured photo (could be a backend call to save it)
+function savePhoto(photoDataUrl) {
+    // Example: send the photo to a server (you can adapt this to your needs)
+    console.log("Saving photo...");
+    // Fetch request to save the photo on the server (using FormData, AJAX, etc.)
+}
+document.getElementById('uploadButton').addEventListener('click', function () {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = '*/*'; // Accept any file type
+    fileInput.click();
+
+    fileInput.addEventListener('change', function () {
+        const file = fileInput.files[0];
+        if (file) {
+            alert(`Selected file: ${file.name}`);
+
+            // Optionally, save the file (send it to server or save locally)
+            saveUploadedFile(file);
+        }
+    });
+});
+
+// Save the uploaded file (could be a backend call to save it)
+function saveUploadedFile(file) {
+    // Example: send the file to a server (using FormData, AJAX, etc.)
+    console.log("Saving uploaded file...");
+    // Here you would send the file to your server for saving
+}
+
+document.getElementById('reconcileButton').addEventListener('click', function () {
+    const reconcileTextArea = document.createElement('textarea');
+    reconcileTextArea.placeholder = "Write your letter of reconciliation here...";
+    reconcileTextArea.style.width = "100%";
+    reconcileTextArea.style.height = "200px";
+    reconcileTextArea.style.marginTop = "10px";
+
+    const saveButton = document.createElement('button');
+    saveButton.textContent = "Save Reconciliation Letter";
+    saveButton.addEventListener('click', function () {
+        const letterContent = reconcileTextArea.value;
+        if (letterContent.trim() !== "") {
+            alert("Reconciliation letter saved!");
+            // Add your logic here to save the letter (e.g., send to server)
+        } else {
+            alert("Please write something in the letter.");
         }
     });
 
-        function toggleReimbursementFields() {
-            const typeOfRequest = document.getElementById("type-of-request").value;
-            const actionButtons = document.getElementById("action-buttons");
-            actionButtons.style.display = typeOfRequest === "Reimbursement" ? "flex" : "none";
-        }
+    const reconcileContainer = document.getElementById('reconcileContainer');
+    reconcileContainer.innerHTML = '';  // Clear previous content
+    reconcileContainer.appendChild(reconcileTextArea);
+    reconcileContainer.appendChild(saveButton);
+});
 
-        function openCamera() {
-            const input = document.getElementById("camera-input");
-            input.click();
-        }
-        function openUpload() {
-            const input = document.getElementById("upload-input");
-            input.click();
-        }
 
-        function showReconcileTextArea() {
-            const textarea = document.getElementById("reconcile-textarea");
-            textarea.classList.remove("hidden");
+      
+        
+
+
+    function removeSubCategory(button) {
+        button.closest('.subcategory-container').remove();
+    }
+    document.getElementById("proceedButton").style.display = "block";
+    function proceed() {
+    // Get the user's locale (this will return the language/country code like 'en-US', 'en-KE', etc.)
+    const userLocale = navigator.language || 'en-US'; // Default to 'en-US' if locale is not found
+    
+    // Get the currency code based on the user's locale
+    const currencyCode = getCurrencyCode(userLocale);
+    
+    // Use the user's locale and their currency
+    const formatter = new Intl.NumberFormat(userLocale, { 
+        style: 'currency', 
+        currency: currencyCode || 'USD' // Default to 'USD' if currency code is empty
+    });
+
+    let total = 0;
+    let summaryHTML = `<h3>Summary</h3>
+        <p><strong>Request Type:</strong> ${document.getElementById("requestType").value}</p>
+        <p><strong>Category:</strong> ${document.getElementById("category").value}</p>`;
+
+    // Loop through all subcategories
+    document.querySelectorAll(".subcategory-container").forEach(box => {
+        let name = box.querySelector("h2").innerText;
+        let desc = box.querySelector("input[type='text']").value;
+        let amount = parseFloat(box.querySelector(".amount").value) || 0;
+        let qty = parseInt(box.querySelector(".quantity").value) || 1;
+        let subtotal = amount * qty;
+        total += subtotal;
+
+        // Add each item's info to the summary HTML
+        summaryHTML += `
+            <div><strong>${name}</strong><br>
+            Description: ${desc}<br>
+            Amount: ${formatter.format(amount)} x Quantity: ${qty} = ${formatter.format(subtotal)}</div><hr>`;
+    });
+
+    // Display the total
+    summaryHTML += `<p class="total-display">Total Request: ${formatter.format(total)}</p>`;
+    
+    // Show the summary and the proceed button
+    document.getElementById("summary").innerHTML = summaryHTML;
+    document.getElementById("summary").classList.remove("hidden");
+    document.getElementById("sendReceiptButton").style.display = "block";
+}
+
+// This function returns the currency code based on the user's locale
+function getCurrencyCode(locale) {
+    // Example of mapping some locales to their respective currency codes
+    const currencyMap = {
+        'en-US': 'USD',   // United States Dollar (USA)
+        'en-KE': 'KES',   // Kenyan Shilling (Kenya)
+        'en-TZ': 'TZS',   // Tanzanian Shilling (Tanzania)
+        'en-UG': 'UGX',   // Ugandan Shilling (Uganda)
+        'en-ZM': 'ZMW',   // Zambian Kwacha (Zambia)
+        'en-GH': 'GHS',   // Ghanaian Cedi (Ghana)
+        // Add more mappings as necessary
+    };
+
+    // Default to USD if locale is not recognized
+    return currencyMap[locale] || 'USD';
+}
+
+async function sendAndDownloadReceipt() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    // Loading the logo image asynchronously
+    const logo = new Image();
+    logo.src = "https://familyhumanitarian.org/wp-content/uploads/2020/04/logo-wide-blue.png";
+
+    await new Promise(res => {
+        logo.onload = res;  // Ensure the logo is fully loaded before proceeding
+    });
+
+    // Add the logo to the PDF
+    doc.addImage(logo, "PNG", 10, 10, 60, 20);
+    
+    // Set the font for the document title
+    doc.setFontSize(16);
+    doc.text("Family Humanitarian Expense Request", 10, 40);
+    
+    // Get the summary text content from the page
+    const summaryText = document.getElementById("summary").innerText;
+
+    // Set up y-coordinate for text placement
+    let y = 50;
+    
+    // Split the summary into lines and add each line to the PDF
+    summaryText.split("\n").forEach(line => {
+        doc.text(line, 10, y);
+        y += 7; // Adjust vertical position for the next line
+        if (y > 280) { // If we are nearing the end of the page
+            doc.addPage(); // Add a new page
+            y = 20; // Reset the y-position to the top of the new page
         }
+    });
 
-        function calculateTotalAmount() {
-            const amount = parseFloat(document.getElementById("amount").value) || 0;
-            const quantity = parseFloat(document.getElementById("quantity").value) || 0;
-            const transactionCost = parseFloat(document.getElementById("transaction-cost").value) || 0;
-            const totalAmount = (amount * quantity) + transactionCost;
+    // Trigger the download of the PDF
+    doc.save("Expense_Request.pdf");
+}
 
-            const country = document.getElementById("country").value;
-            const currency = getCurrencyByCountry(country);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</script>  
+<!-- Footer -->
 
-            document.getElementById("total-amount").value = `${currency} ${totalAmount.toFixed(2)}`;
-        }
-
-        function getCurrencyByCountry(country) {
-            switch (country) {
-                case "Kenya": return "Ksh";
-                case "Ghana": return "Ghs";
-                case "Uganda": return "Ugx";
-                default: return "";
-            }
-        }
-    </script><!-- Footer -->
-<footer>
-  <p>&copy; 2025 Fh260. All rights reserved.</p>
-  <p>
+<footer class="main-footer">
+<p>&copy; 2025 Fh260. All rights reserved.</p>
+<p>
     <a href="sign.html">Sign In</a> | 
     <a href="index.html">Back Page</a> | 
-    <a href="#" onclick="logoutUser()">Log Out</a>
-  </p>
+    <a href="sign.html">Sign Up</a>
+</p>
+</footer>
 </footer>
 
 <script>
-  // Function to handle user logout
-  function logoutUser() {
-    // Clear user session or data (example for localStorage)
-    localStorage.clear(); // Adjust based on your storage method (session, cookies, etc.)
+// Function to handle user logout
+function logoutUser() {
+// Clear user session or data (example for localStorage)
+localStorage.clear(); // Adjust based on your storage method (session, cookies, etc.)
 
-    // Redirect to a login or home page
-    alert("You have successfully logged out.");
-    window.location.href = "sign.html"; // Redirect to the sign-in page
-  }
+// Redirect to a login or home page
+alert("You have successfully logged out.");
+window.location.href = "sign.html"; // Redirect to the sign-in page
+}
 </script>
+
+</body>
+</html>
