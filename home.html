@@ -258,7 +258,7 @@ header p {
           <a href="home.html">Home</a>
           <a href="apply.html">Apply</a>
           <a href="receipts.html">Receipts</a>
-         
+          <a href="contact.html">Contact</a>
         </nav>
       </div>
   </div>
@@ -314,7 +314,21 @@ header p {
             // Display user initials in a small round yellow circle
             const userCircle = document.createElement('div');
             userCircle.textContent = userInitials;
-           
+            userCircle.style.cssText = `
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                width: 40px;
+                height: 40px;
+                background: brown;
+                color: black;
+                font-size: 1rem;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: bold;
+            `;
             document.body.appendChild(userCircle);
         }
     });
@@ -395,7 +409,8 @@ header p {
         <span id="sellRate">131.25</span>
       </p>
     </div>
-  </section><style>
+  </section><body>
+    <style>
   /* Container for the buttons */
   .button-container {
     display: flex;
@@ -448,10 +463,11 @@ header p {
      class="btn btn-track" 
      target="_blank">Track</a>
   <!-- Funds Button -->
-  <a href="https://feji.us/ufkfh1" 
+  <a href="calender.html" 
      class="btn btn-funds" 
-     target="_blank">Funds</a>
+     target="_blank">Planner</a>
 </div>
+
 
 
  <!-- Footer -->
