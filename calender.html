@@ -6,30 +6,63 @@
   <title>Planner with Reminders</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      color: #333;
-      background-color: #f4f4f4;
-      text-align: center;
-      margin: 0;
-      padding: 20px;
-    }
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    
+} 
+header {
+            background-color: #003366; /* KCAU's branding color */
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    header {
-      background-color: #003366;
+        header .logo img {
+            height: 40px;
+        }
+
+        header nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        header h3 {
+  font-weight: bold;
+  font-size: 24px; /* Adjust size as needed */
+}
+
+/* Navigation Bar */
+.top-nav {
+      background-color: #737a81;
       color: white;
-      padding: 20px;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .top-nav .logo {
       font-size: 24px;
       font-weight: bold;
     }
-
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    .top-nav nav {
+      display: flex;
+      gap: 20px;
     }
+    .top-nav nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    .top-nav nav a:hover {
+      text-decoration: underline;
+    }
+
+   
 
     label, input, textarea {
       display: block;
@@ -92,7 +125,22 @@
   </style>
 </head>
 <body>
-  <header>Planner with Reminders</header>
+    <header>
+        <h3>Planner with Reminders</h3>
+      </header><!-- Navigation Bar -->
+      
+  <div class="top-nav">
+    <div class="log"></div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="view.html">Downloads</a>
+      <a href="receipts.html">Receipts</a>
+      
+    </nav>
+  </div><div class="right-offset">
+      <!-- all your content here -->
+  </div>
+  
   <div class="container">
     <h2>Add New Event</h2>
     
@@ -162,17 +210,7 @@
 </footer>
 </footer>
 
-<script>
-  // Function to handle user logout
-  function logoutUser() {
-    // Clear user session or data (example for localStorage)
-    localStorage.clear(); // Adjust based on your storage method (session, cookies, etc.)
 
-    // Redirect to a login or home page
-    alert("You have successfully logged out.");
-    window.location.href = "sign.html"; // Redirect to the sign-in page
-  }
-</script>
 
 </body>
 </html>

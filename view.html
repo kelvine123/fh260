@@ -9,7 +9,74 @@
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
             text-align: center;
+        }html, body {
+  height: 100%; /* Full height of the screen */
+  margin: 0; /* Remove default margin */
+}
+
+* {
+  box-sizing: border-box; /* Ensure padding and borders are included in element's total width/height */
+}
+
+.container {
+  display: flex;
+  justify-content: center; /* Center the content horizontally */
+  align-items: center; /* Center the content vertically */
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  overflow: auto; /* Allow scrolling if content overflows */
+}
+header {
+            background-color: #003366; /* KCAU's branding color */
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        header .logo img {
+            height: 40px;
+        }
+
+        header nav ul {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+/* Navigation Bar */
+.top-nav {
+      background-color: #737a81;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .top-nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .top-nav nav {
+      display: flex;
+      gap: 20px;
+    }
+    .top-nav nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+    }
+    .top-nav nav a:hover {
+      text-decoration: underline;
+    }
+
 
         .pdf-container {
             display: flex;
@@ -52,6 +119,7 @@
             padding: 20px 10px;
             font-size: 0.9rem;
             margin-top: 30px;
+            
         }
 
         .main-footer a {
@@ -65,7 +133,32 @@
             text-decoration: underline;
             color: #ffd700;
         }
-    </style>
+    </style><!-- Header Section -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="KCAU Logo">
+        </div>
+        <nav>
+            <ul>
+                
+                
+            </ul>
+        </nav>
+    </header> <!-- Navigation Bar -->
+    <div class="top-nav">
+      <div class="log"></div>
+      <nav>
+        <a href="home.html">Home</a>
+        <a href="apply.html">Apply</a>
+        <a href="receipts.html">Receipts</a>
+        
+      </nav>
+    </div><div class="right-offset">
+        <!-- all your content here -->
+    </div>
+    
+</div>
+
 </head>
 <body>
     <h1>Downloadable Receipts</h1>

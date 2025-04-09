@@ -105,7 +105,7 @@
   margin: 10px auto;
   max-width: 600px; /* Limit size on larger screens */
   width: 100%;
-  height: 10cm; /* Set height to 10 cm */
+  height: 12cm; /* Set height to 10 cm */
 }
 
     
@@ -255,10 +255,10 @@ header p {
       <div class="top-nav">
         <div class="log"></div>
         <nav>
-          <a href="home.html">Home</a>
+          <a href="view.html">Downloads</a>
           <a href="apply.html">Apply</a>
           <a href="receipts.html">Receipts</a>
-          <a href="contact.html">Contact</a>
+          
         </nav>
       </div>
   </div>
@@ -419,8 +419,21 @@ header p {
     margin-top: 20px; /* Space above the buttons */
   }
 
-  /* General button styles */
-  .btn {
+  /* General button styles for planner*/
+  .ct-btn {
+    display: inline-block;
+    width: 3cm;
+    height: 1cm; /* Set height to 2cm */
+    padding: 0 30px; /* Horizontal padding */
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 5px;
+    line-height: 1cm; /* Vertically center text */
+  }/* General button styles for downloads */
+  .c-btn {
     display: inline-block;
     width: 3cm;
     height: 1cm; /* Set height to 2cm */
@@ -434,8 +447,8 @@ header p {
     line-height: 1cm; /* Vertically center text */
   }
 
-  /* Track button (Orange) */
-  .btn-track {
+  /* Downloads button (Orange) */
+  .c-btn {
     background-color: orange;
   }
 
@@ -443,8 +456,8 @@ header p {
     background-color: #ff8c00; /* Darker orange on hover */
   }
 
-  /* Funds button (Green) */
-  .btn-funds {
+  /* Planner button (Green) */
+  .ct-btn{
     background-color: green;
   }
 
@@ -458,14 +471,10 @@ header p {
 
 <!-- Buttons container -->
 <div class="button-container">
-  <!-- Track Button -->
-  <a href="view.html" 
-     class="btn btn-track" 
-     target="_blank">Downloads</a>
-  <!-- Funds Button -->
-  <a href="calender.html" 
-     class="btn btn-funds" 
-     target="_blank">Planner</a>
+  <!-- Download Button -->
+  <a href="view.html" class="c-btn">Downloads</a>
+  <!-- Calendar Button -->
+  <a href="calender.html" class="ct-btn">Planner</a>
 </div>
 
 
